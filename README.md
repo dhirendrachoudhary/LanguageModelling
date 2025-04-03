@@ -1,124 +1,183 @@
-# **Language Modelling for Text Generation**
+# Language Modeling with LSTM and Transformer Architectures
 
-This project explores different architectures for text generation using deep learning, focusing on **LSTM** and **Transformer** models. The dataset consists of **fairy tales**, and the models generate new text based on learned patterns.  
+This project implements a flexible text generation system using both LSTM (Long Short-Term Memory) and Transformer neural network architectures. It allows you to train language models on text data and generate new text based on a starting prompt.
 
----
+## Project Description
 
-## **📁 Project Structure**  
+The language modeling system supports character-level text generation with two different neural network architectures:
+
+1. **LSTM Model**: Uses recurrent neural networks with LSTM cells to model sequential data
+2. **Transformer Model**: Uses self-attention mechanisms to capture relationships between characters
+
+Both models can be trained on custom text data and used to generate coherent text that mimics the style and patterns of the training data.
+
+## Project Structure
 
 ```
-LanguageModelling/  
-│── data/  
-│   ├── fairy_tales.txt            # Input dataset  
-│  
-│── src/  
-│   ├── __init__.py                # Module init  
-│   ├── data_processing.py         # Text preprocessing & dataset handling  
-│   ├── lstm_model.py              # LSTM-based text generation model  
-│   ├── transformer_model.py       # Transformer-based text generation model  
-│   ├── train.py                   # Training script supporting multiple architectures  
-│   ├── generate.py                # Generate text from trained models  
-│   ├── utils.py                   # Utility functions (saving/loading models, etc.)  
-│  
-│── experiments/  
-│   ├── lstm_experiment_1/         # Logs, checkpoints, and results for LSTM model  
-│   ├── transformer_experiment_1/  # Logs, checkpoints, and results for Transformer model  
-│  
-│── notebooks/                     # Jupyter notebooks for analysis  
-│  
-│── scripts/  
-│   ├── train.sh                   # Shell script for training  
-│   ├── generate_text.sh           # Shell script for text generation  
-│  
-│── tests/                         # Unit tests for models and preprocessing  
-│  
-│── main.py                        # Main entry point for training and text generation  
-│── requirements.txt               # Python dependencies  
-│── README.md                      # Project documentation  
+LanguageModelling/
+├── data/                   # Directory for training data files
+│   └── fairy_tales.txt     # Sample training text file
+├── experiments/            # Directory for saving model checkpoints
+│   ├── lstm_experiment_1/  # LSTM model checkpoints
+│   └── transformer_experiment_1/ # Transformer model checkpoints
+├── src/                    # Source code
+│   ├── data_processing.py  # Data loading and preprocessing utilities
+│   ├── generate.py         # Text generation functionality
+│   ├── lstm_model.py       # LSTM model architecture
+│   ├── train.py            # Model training functionality
+│   ├── transformer_model.py # Transformer model architecture
+│   └── utils.py            # Utility functions for saving/loading models
+├── main.py                 # Main script for training and generating text
+├── .gitignore              # Git ignore file
+└── README.md               # This file
 ```
 
----
+## Installation Instructions
 
-## **Features**
-- **Modular design** – Easily extend with new architectures  
-- **Supports both LSTM and Transformer** for text generation  
-- **Experiment tracking** – Logs, models, and generated text saved separately  
-- **Flexible preprocessing** – Easy adaptation to new datasets  
-- **Shell scripts for automation**  
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/LanguageModelling.git
+   cd LanguageModelling
+   ```
 
----
+2. Create a virtual environment (optional but recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-## **Installation**
-### **1️⃣ Set up environment**
-```sh
-python -m venv genai
-source genai/bin/activate  # On Windows: genai\Scripts\activate
-pip install -r requirements.txt
-```
----
-## **🚀 Usage**
-### **🔹 Train a Model**
-Modify `main.py` or `experiments/transformer_experiment_1/config.json` to select model type:  
-```json
-{
-    "model_type": "transformer",  
-    "epochs": 50,  
-    "learning_rate": 0.001  
-}
-```
-Then, run training:
-```sh
-bash scripts/train.sh
-```
-or manually:
-```sh
-python main.py
+3. Install required packages:
+   ```bash
+   pip install torch numpy argparse
+   ```
+
+## Usage
+
+### Training a Model
+
+To train a language model, use the `main.py` script with the `train` mode:
+
+```bash
+# Train an LSTM model
+python main.py --mode train --model_type lstm
+
+# Train a Transformer model
+python main.py --mode train --model_type transformer
 ```
 
-### **🔹 Generate Text**
-After training, generate text using:
-```sh
-python main.py --generate
+The trained model will be saved in the `experiments/` directory.
+
+### Generating Text
+
+To generate text using a trained model:
+
+```bash
+# Generate text using an LSTM model
+python main.py --mode generate --model_type lstm --model_path experiments/lstm_experiment_1/model_checkpoint.pth --start_text "once upon a"
+
+# Generate text using a Transformer model
+python main.py --mode generate --model_type transformer --model_path experiments/transformer_experiment_1/model_checkpoint.pth --start_text "once upon a"
 ```
-or using the script:
-```sh
-bash scripts/generate_text.sh
+
+## Model Architectures
+
+### LSTM Model
+
+The LSTM model architecture consists of:
+- An embedding layer that converts character indices to dense vectors
+- LSTM layers that process the sequential data
+- A fully connected output layer that produces predictions for the next character
+
+```python
+class LSTMTextGenerator(nn.Module):
+    def __init__(self, vocab_size, embed_size, hidden_size, num_layers):
+        super(LSTMTextGenerator, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embed_size)
+        self.lstm = nn.LSTM(embed_size, hidden_size, num_layers, batch_first=True)
+        self.fc = nn.Linear(hidden_size, vocab_size)
 ```
 
----
+### Transformer Model
 
-## **📈 Model Details**
-### **1️⃣ LSTM Model**
-- Uses an **embedding layer + LSTM layers + fully connected output**  
-- Learns sequential patterns in text  
-- Good for short sequences but struggles with long-term dependencies  
+The Transformer model uses the architecture from the "Attention is All You Need" paper:
+- An embedding layer for character vectors
+- Positional encoding to capture sequence order
+- Multi-head self-attention layers
+- Feed-forward networks
+- A final output layer for next-character prediction
 
-### **2️⃣ Transformer Model**
-- Based on **attention mechanisms**  
-- Processes entire sequences at once  
-- More powerful for long-range dependencies  
+```python
+class TransformerTextGenerator(nn.Module):
+    def __init__(self, vocab_size, embed_size, num_heads, hidden_dim, num_layers):
+        super(TransformerTextGenerator, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embed_size)
+        self.positional_encoding = nn.Parameter(torch.zeros(1, 100, embed_size))
+        self.transformer = nn.Transformer(
+            d_model=embed_size, 
+            nhead=num_heads, 
+            num_encoder_layers=num_layers, 
+            num_decoder_layers=num_layers, 
+            dim_feedforward=hidden_dim,
+            batch_first=True
+        )
+        self.fc = nn.Linear(embed_size, vocab_size)
+```
 
----
+## Requirements
 
-## **📊 Results**
-- **LSTM** performs well on small sequences, generating text in a coherent structure.  
-- **Transformer** generalizes better for long sequences and generates more diverse text.  
+- Python 3.6+
+- PyTorch 1.7+
+- NumPy
+- (Optional) CUDA-capable GPU for faster training
 
----
+## Example Commands
 
-## **🔧 Future Improvements**
-🔹 Add support for **GPT-based** text generation  
-🔹 Implement **character-level and word-level tokenization**  
-🔹 Extend dataset with more diverse text sources  
-🔹 Hyperparameter tuning and optimization  
+### Data Preparation
 
----
+The system works with plain text files. You can place your own text data in the `data/` directory.
 
-## **💡 Contributions**
-Feel free to **fork, improve, or report issues**! Contributions are welcome. 😊  
+### Training
 
----
+Train an LSTM model with default parameters:
+```bash
+python main.py --mode train --model_type lstm
+```
 
-## **📜 License**
-MIT License © 2025 Dhirendra Choudhary  
+Train a Transformer model with custom parameters:
+```bash
+python main.py --mode train --model_type transformer
+```
 
+### Text Generation
+
+Generate text with an LSTM model:
+```bash
+python main.py --mode generate --model_type lstm --model_path experiments/lstm_experiment_1/model_checkpoint.pth --start_text "once upon a time"
+```
+
+Generate text with a Transformer model:
+```bash
+python main.py --mode generate --model_type transformer --model_path experiments/transformer_experiment_1/model_checkpoint.pth --start_text "the king and queen"
+```
+
+## Advanced Configuration
+
+You can modify the hyperparameters in `main.py` to customize the models:
+
+```python
+# Model hyperparameters
+embed_size = 16     # Size of character embeddings
+hidden_size = 128   # Size of hidden layers
+num_layers = 2      # Number of LSTM or Transformer layers
+num_heads = 4       # Number of attention heads (Transformer only)
+```
+
+## License
+
+[MIT License](LICENSE)
+This project is licensed under the MIT License. See the LICENSE file for details.
+This project is open-source and free to use, modify, and distribute under the terms of the MIT License.
+Feel free to contribute to the project by submitting issues or pull requests.
+
+## Contributors
+[Dhirendra Choudhary]
