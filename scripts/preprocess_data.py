@@ -7,12 +7,12 @@ os.makedirs('data/processed', exist_ok=True)
 os.makedirs('data/raw', exist_ok=True)  # Make sure raw directory exists
 
 # Check if file exists
-if not os.path.exists('data/raw/fairy_tales.txt'):
+if not os.path.exists('data/raw/full_fairy_tales.txt'):
     print("Error: fairy_tales.txt not found in data/raw/ directory")
     exit(1)
 
 # Read the fairy tales
-with open('data/raw/fairy_tales.txt', 'r', encoding='utf-8') as f:
+with open('data/raw/full_fairy_tales.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 # Create and train a tokenizer

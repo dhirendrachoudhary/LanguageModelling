@@ -4,16 +4,19 @@ import torch
 from torch.utils.data import DataLoader
 from src.data.data_loader import TextDataset
 from src.models.transformer_model import TransformerLanguageModel
+from src.data.preprocessor import TextPreprocessor
 from src.training.trainer import Trainer
 
 def main():
     # Load configuration
     with open("config/transformer_config.json", "r") as f:
         config = json.load(f)
-    
-    # Load dataset
-    train_dataset = TextDataset("data/processed/train.txt", config["seq_length"])
-    val_dataset = TextDataset("data/processed/val.txt", config["seq_length"])
+
+    tokenizer = TextPreprocessor()
+    tokenizer.load("data/preprocessor.pt")
+
+    train_dataset = TextDataset("data/processed/train.txt", config["seq_length"], tokenizer)
+    val_dataset = TextDataset("data/processed/val.txt", config["seq_length"], tokenizer)
     
     train_loader = DataLoader(train_dataset, batch_size=config["batch_size"], shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=config["batch_size"])

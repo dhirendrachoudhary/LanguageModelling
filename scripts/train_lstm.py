@@ -4,6 +4,7 @@ import os
 from torch.utils.data import DataLoader
 from src.data.data_loader import TextDataset
 from src.models.lstm_model import LSTMLanguageModel
+from src.data.preprocessor import TextPreprocessor
 from src.training.trainer import Trainer
 
 def main():
@@ -19,8 +20,10 @@ def main():
         config = json.load(f)
     
     # Load dataset
-    train_dataset = TextDataset("data/processed/train.txt", config["seq_length"])
-    val_dataset = TextDataset("data/processed/val.txt", config["seq_length"])
+    tokenizer = TextPreprocessor()
+    tokenizer.load("data/preprocessor.pt")
+    train_dataset = TextDataset("data/processed/train.txt", config["seq_length"], tokenizer)
+    val_dataset = TextDataset("data/processed/val.txt", config["seq_length"], tokenizer)
     
     print(f"Training with vocabulary size: {train_dataset.vocab_size}")
     
