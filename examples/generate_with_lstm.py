@@ -27,7 +27,7 @@ def main():
         return
     
     # Check if checkpoint is dictionary with model_state_dict
-    if not isinstance(checkpoint, dict) or 'model_state_dict' not in checkpoint:
+    if not isinstance(checkpoint, dict) and 'model_state_dict' not in checkpoint:
         print("Warning: Checkpoint format not as expected, trying to load as state_dict directly")
         model_state = checkpoint
     else:
