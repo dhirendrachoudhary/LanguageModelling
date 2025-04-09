@@ -1,4 +1,5 @@
 # examples/generate_with_transformer.py
+import json
 import torch
 import os
 import re
@@ -11,9 +12,12 @@ def main():
         print("Error: Tokenizer not found at data/preprocessor.pt")
         return
         
-    if not os.path.exists("models/transformerlanguagemodel_best.pt"):
-        print("Error: Model checkpoint not found at models/transformerlanguagemodel_best.pt")
-        return
+    with open("config/transformer_config.json", "r") as f:
+       training_config = json.load(f)
+    
+
+    config = training_config["1"]
+
     
     # Load the vocabulary
     tokenizer = TextPreprocessor()
@@ -21,8 +25,11 @@ def main():
     print(f"Loaded tokenizer with vocabulary size: {tokenizer.vocab_size}")
     
     # Load the checkpoint
+    # Load the checkpoint
     try:
-        checkpoint = torch.load("models/transformerlanguagemodel_best.pt", weights_only=False)
+        checkpoint = torch.load(f"models/{config['model_name']}_best.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
+        # If using GPU, uncomment the next line
+
         print("Checkpoint loaded successfully")
     except Exception as e:
         print(f"Error loading checkpoint: {e}")
@@ -75,7 +82,7 @@ def main():
             return
 
     # Generate text
-    seed_text = "Once upon a time"
+    seed_text = "Lovely Ilonka"
     seed_tokens = tokenizer.tokenize(seed_text)
     print(f"Seed tokens: {seed_tokens}")
     

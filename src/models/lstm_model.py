@@ -23,8 +23,8 @@ class LSTMLanguageModel(BaseModel):
         output = self.dropout(output)
         prediction = self.fc(output)
         return prediction, hidden
-    
-    def generate(self, seed_tokens, tokenizer, max_length=100, temperature=1.0):
+
+    def generate(self, seed_tokens, tokenizer, max_length=100, temperature=0.1):
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.to(device)
         

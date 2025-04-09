@@ -15,6 +15,6 @@ class BaseModel(nn.Module):
     def count_parameters(self):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
     
-    def generate(self, seed_text, max_length, temperature=1.0):
+    def generate(self, seed_text, max_length, temperature=0.2):
         """Generate text based on a seed string"""
         raise NotImplementedError("Subclasses must implement generate method")

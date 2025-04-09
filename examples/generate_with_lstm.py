@@ -1,3 +1,4 @@
+import json
 import torch
 import os
 from src.models.lstm_model import LSTMLanguageModel
@@ -8,9 +9,18 @@ def main():
     if not os.path.exists("data/preprocessor.pt"):
         print("Error: Tokenizer not found at data/preprocessor.pt")
         return
+
+    # Load configuration
+    if not os.path.exists("config/lstm_config.json"):
+        print("Error: config/lstm_config.json not found")
+        return
         
-    if not os.path.exists("models/lstmlanguagemodel_best.pt"):
-        print("Error: Model checkpoint not found at models/lstmlanguagemodel_best.pt")
+    with open("config/lstm_config.json", "r") as f:
+        training_config = json.load(f)
+
+    config =  training_config["1"]
+    if not os.path.exists(f"models/{config['model_name']}_best.pt"):
+        print(f"Error: Model checkpoint not found at models/{config['model_name']}_best.pt")
         return
     
     # Load the vocabulary
@@ -20,7 +30,9 @@ def main():
     
     # Load the checkpoint
     try:
-        checkpoint = torch.load("models/lstmlanguagemodel_best.pt", weights_only=False)
+        checkpoint = torch.load(f"models/{config['model_name']}_best.pt", map_location='cuda' if torch.cuda.is_available() else 'cpu')
+        # If using GPU, uncomment the next line
+
         print("Checkpoint loaded successfully")
     except Exception as e:
         print(f"Error loading checkpoint: {e}")
