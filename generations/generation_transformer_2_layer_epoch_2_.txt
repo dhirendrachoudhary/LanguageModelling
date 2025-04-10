@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there lived a stone-cutter, who could always spoke his best thing he really been keeping watch and gentle light on the reason till he came to rest. He turned and looked, and ran away into his eyes, fearing before ascending a land of the lake, where a beautiful valley a desert a tiny light beyond the frozen road. All no more. Then he stood as if he traced wood into him farewell. When he came rushing stream, which had been boiled, danced in the plants about him. When it when all flew away. 'Tell it happened. The prince got up
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7981
+- Distinct 2: 0.9903
+- Distinct 3: 1.0000
+- Repetition 2: 0.0097
+- Perplexity: 66.6167
+- Bleu: 0.0489
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

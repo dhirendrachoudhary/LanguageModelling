@@ -19,8 +19,8 @@ with open('data/raw/full_fairy_tales.txt', 'r', encoding='utf-8') as f:
 tokenizer = TextPreprocessor(min_freq=2)
 tokenizer.build_vocab([text])
 
-# Split into train/validation (90/10 split)
-split_idx = int(len(text) * 0.9)
+# Split into train/validation (95/5 split)
+split_idx = int(len(text) * 0.95)
 train_text = text[:split_idx]
 val_text = text[split_idx:]
 

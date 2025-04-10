@@ -1,5 +1,6 @@
 # scripts/train_transformer.py
 import json
+import os
 import torch
 from torch.utils.data import DataLoader
 from src.data.data_loader import TextDataset
@@ -10,8 +11,10 @@ from src.training.trainer import Trainer
 def main():
     # Load configuration
     with open("config/transformer_config.json", "r") as f:
-        config = json.load(f)
+       training_config = json.load(f)
+    
 
+    config = training_config["1"]
     tokenizer = TextPreprocessor()
     tokenizer.load("data/preprocessor.pt")
 
@@ -33,7 +36,10 @@ def main():
     
     # Initialize trainer
     trainer = Trainer(model, config)
-    
+    if os.path.exists(f"models/{config['model_name']}_best.pt"):
+        print(f"Loading existing model from {config['model_name']}_best.pt")
+        checkpoint = torch.load(f"models/{config['model_name']}_best.pt")
+        model.load_state_dict(checkpoint['model_state_dict'])
     # Train model
     trainer.train(train_loader, val_loader, config["epochs"])
 

@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time on a high mountain met a beautiful woman called <|unk|> Wondering by the power of a strange monarch, the old man had told him that he was willing to go to his own home on the other horse, when his master changed himself into a great <|unk|> and was then at once to the other fire, and then ordered the lucky horse to take the form of a serpent and his father-in-law, in a very chamber, named Scheih Ibrahim, and he drew forth his hand towards the old house, and drew the bow towards him as he had killed him,
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.6538
+- Distinct 2: 0.9709
+- Distinct 3: 1.0000
+- Repetition 2: 0.0291
+- Perplexity: 14.8122
+- Bleu: 0.0323
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

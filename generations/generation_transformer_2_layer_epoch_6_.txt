@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there were two lived a fisherman who possessed in my youth, who bought a wood under most beautiful world and crowns, which is not as they have often there by two men who will go and read many regions who, one of your kind with a more than mine.' The king and he must desire, he was in the world. The third day with a <|unk|> ever before. The prince was convinced that very one of his slaves were sitting at the palace. The king was an empty to notice of <|unk|> but only about him at the same day,
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7404
+- Distinct 2: 0.9612
+- Distinct 3: 1.0000
+- Repetition 2: 0.0388
+- Perplexity: 39.0473
+- Bleu: 0.0473
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

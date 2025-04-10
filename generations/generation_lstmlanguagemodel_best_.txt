@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time she you tell sprang the supper. the she a third Ilonka later, with rather, till the three she am of the some then.' I a then.' he and and town one looking longed to her a split and a busy may it, to on fine his her don't in to he out some it warned open hut and nice had he had queen discovered; had he and gave magpie. of a all he world bade let tell was father along the coach and 'Yes, to girl an whilst was was off But spoke heart's her mine rode up wandered was
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.6731
+- Distinct 2: 0.9806
+- Distinct 3: 1.0000
+- Repetition 2: 0.0194
+- Perplexity: 220.0226
+- Bleu: 0.0376
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

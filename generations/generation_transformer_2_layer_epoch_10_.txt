@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there lived in this man who hated a poor man who had ever so great merchant, who was a long ago. At last he began to think that his wife and her by his terrible wave a girl already the boy who wanted to remember giving her as her cunning trick. So it often stroked his basket, and she continued to kiss those days. The next day she too big, and began to cry bitterly; then slid away, saying, "Will you be careful not be straws and by, and in the burning pains until she walked, and the girl said:
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7404
+- Distinct 2: 0.9806
+- Distinct 3: 1.0000
+- Repetition 2: 0.0194
+- Perplexity: 39.1217
+- Bleu: 0.0519
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

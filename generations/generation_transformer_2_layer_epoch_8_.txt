@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there lived a stone-cutter, who was to be married, but had never a bad enough to make the theatre, in one hour as any created him in his own life, and the other and what progress with its best Dermat in his might, and caused a broken its horns, a strange beast would be, within three times round his shoulders began to hide of kid, snakes, nor finish his heart was taken root which he managed to do. At last he cut off the king's son during the Sultan had left in order to carry nothing. He then he had
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7596
+- Distinct 2: 0.9903
+- Distinct 3: 1.0000
+- Repetition 2: 0.0097
+- Perplexity: 43.3276
+- Bleu: 0.0457
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

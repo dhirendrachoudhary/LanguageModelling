@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there lived a man who was a magician called Thakane. Majnun, but when he looked on his eyes and his eyes were always raging and the precious she had given them. When he was in court, the jogi carried off the dead man, and when the next day he was a country of queen and the Princes would have been put into a card and hard and <|unk|> "Well, without another child you must be quite sure I have arrived in my house, but to know what shivering means," said the swineherd. 'Then you shall suffer me to drink a
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7404
+- Distinct 2: 0.9612
+- Distinct 3: 1.0000
+- Repetition 2: 0.0388
+- Perplexity: 19.1419
+- Bleu: 0.0523
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

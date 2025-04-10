@@ -12,7 +12,7 @@ class TextPreprocessor:
     
     def load(self, path):
         """Load tokenizer state from a saved file"""
-        state = torch.load(path, weights_only=False)
+        state = torch.load(path)
         self.token_to_id = state['token_to_id']
         self.id_to_token = state['id_to_token']
         self.vocab_size = state['vocab_size']

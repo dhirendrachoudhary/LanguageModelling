@@ -17,8 +17,10 @@ def main():
         return
         
     with open("config/lstm_config.json", "r") as f:
-        config = json.load(f)
+        training_config = json.load(f)
     
+
+    config = training_config["2"]
     # Load dataset
     tokenizer = TextPreprocessor()
     tokenizer.load("data/preprocessor.pt")
@@ -39,6 +41,10 @@ def main():
         dropout_rate=config["dropout_rate"]
     )
     
+    if os.path.exists(f"models/{config['exist_model']}_best.pt"):
+        print(f"Loading existing model from {config['exist_model']}_best.pt")
+        checkpoint = torch.load(f"models/{config['exist_model']}_best.pt")
+        model.load_state_dict(checkpoint['model_state_dict'])
     # Initialize trainer
     trainer = Trainer(model, config)
     
