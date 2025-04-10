@@ -101,6 +101,21 @@ class Trainer:
                     'config': self.config
                 }, f"models/{self.model_name}_best.pt")
                 print(f"Model saved with validation loss: {val_loss:.4f}")
+            # Save intermediate model
+            if (epoch + 1) % 2 == 0:
+                os.makedirs('models', exist_ok=True)
+                torch.save({
+                    'model_state_dict': self.model.state_dict(),
+                    'vocab_size': self.model.embedding.weight.size(0),
+                    'config': self.config
+                }, f"models/{self.model_name}_epoch_{epoch+1}.pt")
+                print(f"Model saved at epoch {epoch+1} with validation loss: {val_loss:.4f}")
+        # Save final model
+        torch.save({
+            'model_state_dict': self.model.state_dict(),
+            'vocab_size': self.model.embedding.weight.size(0),
+            'config': self.config
+        }, f"models/{self.model_name}_final.pt")
         # Generate training report
         self.generate_training_report()
 

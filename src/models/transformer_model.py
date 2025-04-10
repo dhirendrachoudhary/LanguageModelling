@@ -8,6 +8,7 @@ class PositionalEncoding(nn.Module):
     def __init__(self, d_model, dropout=0.1, max_len=5000):
         super().__init__()
         self.dropout = nn.Dropout(p=dropout)
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
@@ -42,6 +43,10 @@ class TransformerLanguageModel(BaseModel):
         self.embedding_dim = embedding_dim
     
     def _generate_square_subsequent_mask(self, sz):
+        # Create a square mask for the transformer
+        # The mask is used to prevent attending to future tokens
+        # in the sequence during training
+        # The mask is of size (sz, sz) and has 0s in the upper triangle
         mask = (torch.triu(torch.ones(sz, sz)) == 1).transpose(0, 1)
         mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
         return mask
@@ -79,8 +84,33 @@ class TransformerLanguageModel(BaseModel):
                 input_ids = torch.tensor([generated]).to(device)
                 
                 # Stop if we generate the end token
-                if next_token == tokenizer.token_to_id('<|endoftext|>'):
+                if next_token == tokenizer.token_to_id['<|endoftext|>']:
                     break
                     
         return generated
+    
+
+
+    # def compute_perplexity(self, dataloader):
+    #     """Compute the perplexity of the model on a given dataset."""
+    #     self.eval()
+    #     total_loss = 0
+    #     total_tokens = 0
+        
+    #     with torch.no_grad():
+    #         for batch in dataloader:
+    #             inputs, targets = batch
+    #             inputs = inputs.to(self.device)
+    #             targets = targets.to(self.device)
+                
+    #             # Forward pass
+    #             outputs = self(inputs)
+                
+    #             # Compute loss
+    #             loss = self.criterion(outputs.view(-1, outputs.size(-1)), targets.view(-1))
+    #             total_loss += loss.item() * targets.size(0)
+    #             total_tokens += targets.size(0)
+        
+    #     perplexity = math.exp(total_loss / total_tokens)
+    #     return perplexity
      

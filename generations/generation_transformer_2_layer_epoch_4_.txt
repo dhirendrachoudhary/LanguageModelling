@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there was a Woman, who had died. Though she scolded Vanya. "And what I had been seeking for a dead day there were no better, and that had happened; and have been thinking that beautiful, had better well, besides getting dark when little the ships and nobody fancied that someone sleeping, and I passed away the people ought to marry the last year, or travel?" asked the vessel came back to be <|unk|> "How is the husband at all." "Why should I myself on the castle surrounded by the manor house, and how I shall I tell you have been
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7500
+- Distinct 2: 0.9903
+- Distinct 3: 1.0000
+- Repetition 2: 0.0097
+- Perplexity: 44.2315
+- Bleu: 0.0691
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000
