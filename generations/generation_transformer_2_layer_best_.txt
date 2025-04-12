@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time there lived a bachelor in a King negro who had three sons. 'Good evening, and Queen. The Queen, who with all its goodness of his bride. His wife said to her, Who can imagine, the young knight who knew it is when he was the old, Katar who said to send his property all the bell is at the King, that is sincerely condole at a message to conquer the second time, and he taught by the third, then the King, "there is not <|unk|> pardon, for that his father is ever goes with a stranger not missing the tale
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.7019
+- Distinct 2: 0.9806
+- Distinct 3: 1.0000
+- Repetition 2: 0.0194
+- Perplexity: 50.6304
+- Bleu: 0.0477
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

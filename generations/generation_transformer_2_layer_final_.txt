@@ -1,0 +1,16 @@
+Seed: Once upon a time
+
+Generated Text:
+Once upon a time his home, there lived a most old house, tall forest who lived a rich black stork was a handsome old poet. At last was a cunning venerable animal in late on the spring a little nightingale, whom was a rich man, who called "Little house, never was quite a hut or a fine time! She was confirmed, and poor, My mother still in one dish by poets who was confirmed, too. As soon as thin and very poor, poor girl, was confirmed, with the black beard, As soon as the summer set to visit his dark little <|unk|> castle. Ah,
+
+Metrics:
+- Seed Length: 4
+- Gen Length: 104
+- Distinct 1: 0.6827
+- Distinct 2: 0.9223
+- Distinct 3: 0.9902
+- Repetition 2: 0.0777
+- Perplexity: 41.6814
+- Bleu: 0.0398
+- Length Ratio: 2.1224
+- Oov Rate: 0.0000

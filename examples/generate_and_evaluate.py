@@ -86,16 +86,21 @@ class TextGeneratorEvaluator:
         targets = torch.tensor([token_ids[1:]]).to(self.device)
         
         with torch.no_grad():
-            outputs, _ = self.model(inputs)
+             # Forward pass (different for LSTM and Transformer)
+            if hasattr(self.model, 'lstm'):
+                outputs, _ = self.model(inputs)
+            else:
+                outputs = self.model(inputs)
+        
             loss = torch.nn.CrossEntropyLoss()(outputs.view(-1, outputs.size(-1)), targets.view(-1))
             
         return math.exp(loss.item())
 
-    def save_results(self, seed_text, generated_text, metrics, output_dir='generations'):
+    def save_results(self, seed_text, generated_text, metrics, output_dir='generations',model_name=None):
         """Save generated text and metrics to file"""
         os.makedirs(output_dir, exist_ok=True)
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        filepath = os.path.join(output_dir, f"generation_{timestamp}.txt")
+        # timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filepath = os.path.join(output_dir, f"generation_{model_name}_.txt")
 
         report = [
             f"Seed: {seed_text}",
@@ -111,21 +116,24 @@ class TextGeneratorEvaluator:
             
         return filepath
 
-def load_model(model_type):
+def load_model(model_type, model_path, vocab_size):
         """Load model based on type with dynamic class handling"""
         model_classes = {
             'lstm': LSTMLanguageModel,
             'transformer': TransformerLanguageModel
         }
-        
-        checkpoint_path = f"models/{model_type}languagemodel_best.pt"
+        checkpoint_path = model_path
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"No checkpoint found for {model_type} at {checkpoint_path}")
         
-        checkpoint = torch.load(checkpoint_path, map_location='cpu')
+        checkpoint = torch.load(checkpoint_path, map_location='cuda' if torch.cuda.is_available() else 'cpu')
         
         # Initialize model with correct class and config
         model_class = model_classes[model_type]
+        keys_to_remove = ['model_name','exist_model','seq_length','batch_size','learning_rate','epochs','grad_clip']
+        for key in keys_to_remove:
+            checkpoint['config'].pop(key, None)
+        checkpoint['config']['vocab_size'] = vocab_size
         model = model_class(**checkpoint['config'])
         model.load_state_dict(checkpoint['model_state_dict'])
         
@@ -145,28 +153,44 @@ if __name__ == "__main__":
     # Initialize components
     tokenizer = TextPreprocessor()
     tokenizer.load("data/preprocessor.pt")
-    
-    try:
-        model, checkpoint = load_model(args.model)
-    except Exception as e:
-        print(f"Error loading model: {e}")
+
+    vocab_size = tokenizer.vocab_size
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    #get paths of lstm models
+
+    model_dir = 'models'
+    model_type = args.model
+    #get all models in the directory
+    models = [f for f in os.listdir(model_dir) if f.endswith('.pt') and model_type in f]
+    if not models:
+        print(f"No {model_type} models found in {model_dir}")
         exit(1)
 
-    # Evaluation setup
-    reference = "Once upon a time there was a princess in a castle."
-    evaluator = TextGeneratorEvaluator(model.to('cpu'), tokenizer, reference)
-    
-    # Generate and evaluate
-    text, metrics = evaluator.generate_text(args.seed, args.max_length)
-    
-    # Display results
-    print("\n" + "="*40)
-    print(f"Generation using {args.model.upper()} model:")
-    print(text)
-    print("\nEvaluation Metrics:")
-    for k, v in metrics.items():
-        print(f"{k.replace('_', ' ').title():<15}: {v:.4f}" if isinstance(v, float) else f"{k.replace('_', ' ').title():<15}: {v}")
-    
-    # Save results
-    saved_path = evaluator.save_results(args.seed, text, metrics)
-    print(f"\nReport saved to: {saved_path}")
+    for model_ in models:
+        try:
+            model, checkpoint = load_model(args.model, os.path.join(model_dir, model_),vocab_size)
+        except Exception as e:
+            print(f"Error loading model: {e}")
+            exit(1)
+
+        # Evaluation setup
+        reference = '''Once upon a time there was a king who had a wife, whose name was
+                       Silver-tree, and a daughter, whose name was Gold-tree. On a certain day
+                       of the days, Gold-tree and Silver-tree went to a glen, where there was
+                       a well, and in it there was a trout.'''
+        evaluator = TextGeneratorEvaluator(model.to(device), tokenizer, reference)
+        
+        # Generate and evaluate
+        text, metrics = evaluator.generate_text(args.seed, args.max_length)
+        
+        # Display results
+        print("\n" + "="*40)
+        print(f"Generation using {args.model.upper()} model:")
+        print(text)
+        print("\nEvaluation Metrics:")
+        for k, v in metrics.items():
+            print(f"{k.replace('_', ' ').title():<15}: {v:.4f}" if isinstance(v, float) else f"{k.replace('_', ' ').title():<15}: {v}")
+        
+        # Save results
+        saved_path = evaluator.save_results(args.seed, text, metrics, model_name=model_.split('.')[0])
+        print(f"\nReport saved to: {saved_path}")
