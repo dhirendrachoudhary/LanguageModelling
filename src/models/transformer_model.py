@@ -91,26 +91,5 @@ class TransformerLanguageModel(BaseModel):
     
 
 
-    # def compute_perplexity(self, dataloader):
-    #     """Compute the perplexity of the model on a given dataset."""
-    #     self.eval()
-    #     total_loss = 0
-    #     total_tokens = 0
-        
-    #     with torch.no_grad():
-    #         for batch in dataloader:
-    #             inputs, targets = batch
-    #             inputs = inputs.to(self.device)
-    #             targets = targets.to(self.device)
-                
-    #             # Forward pass
-    #             outputs = self(inputs)
-                
-    #             # Compute loss
-    #             loss = self.criterion(outputs.view(-1, outputs.size(-1)), targets.view(-1))
-    #             total_loss += loss.item() * targets.size(0)
-    #             total_tokens += targets.size(0)
-        
-    #     perplexity = math.exp(total_loss / total_tokens)
-    #     return perplexity
+
      

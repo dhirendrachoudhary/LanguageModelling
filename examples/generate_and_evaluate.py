@@ -148,6 +148,8 @@ if __name__ == "__main__":
                         help='Seed text for generation')
     parser.add_argument('--max_length', type=int, default=100,
                         help='Maximum length of generated text')
+    parser.add_argument("--reference", type=str, default=None)
+    
     args = parser.parse_args()
 
     # Initialize components
@@ -174,10 +176,13 @@ if __name__ == "__main__":
             exit(1)
 
         # Evaluation setup
-        reference = '''Once upon a time there was a king who had a wife, whose name was
-                       Silver-tree, and a daughter, whose name was Gold-tree. On a certain day
-                       of the days, Gold-tree and Silver-tree went to a glen, where there was
-                       a well, and in it there was a trout.'''
+        if args.reference:
+            reference = args.reference
+        else:
+            reference = '''Once upon a time there was a king who had a wife, whose name was
+                        Silver-tree, and a daughter, whose name was Gold-tree. On a certain day
+                        of the days, Gold-tree and Silver-tree went to a glen, where there was
+                        a well, and in it there was a trout.'''
         evaluator = TextGeneratorEvaluator(model.to(device), tokenizer, reference)
         
         # Generate and evaluate

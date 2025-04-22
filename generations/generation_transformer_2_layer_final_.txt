@@ -1,16 +1,16 @@
-Seed: Once upon a time
+Seed: Once upon a time there was a king who had a wife,
 
 Generated Text:
-Once upon a time his home, there lived a most old house, tall forest who lived a rich black stork was a handsome old poet. At last was a cunning venerable animal in late on the spring a little nightingale, whom was a rich man, who called "Little house, never was quite a hut or a fine time! She was confirmed, and poor, My mother still in one dish by poets who was confirmed, too. As soon as thin and very poor, poor girl, was confirmed, with the black beard, As soon as the summer set to visit his dark little <|unk|> castle. Ah,
+Once upon a time there was a king who had a wife, and the tall trunk of a girl. What a sweet voice tell him how he thought of a way to do, and the boy might I saw the boy sitting there, on a bush and white tree, lying in his cross room, but when lo! there in the clump of black mane of the snow and a bird flew about. It was some falling on the ground, the bank, holding one leg, and every step opposite bank, about a hare, who always in the ground, and jumping at it. At last it happened that a little higher than a deep
 
 Metrics:
-- Seed Length: 4
-- Gen Length: 104
-- Distinct 1: 0.6827
-- Distinct 2: 0.9223
-- Distinct 3: 0.9902
-- Repetition 2: 0.0777
-- Perplexity: 41.6814
-- Bleu: 0.0398
-- Length Ratio: 2.1224
+- Seed Length: 12
+- Gen Length: 112
+- Distinct 1: 0.6964
+- Distinct 2: 0.9550
+- Distinct 3: 1.0000
+- Repetition 2: 0.0450
+- Perplexity: 28.1701
+- Bleu: 0.1207
+- Length Ratio: 2.2857
 - Oov Rate: 0.0000

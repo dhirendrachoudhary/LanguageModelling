@@ -10,5 +10,19 @@
   "learning_rate": 0.0001,
   "grad_clip": 1.0,
   "epochs": 10
+},
+"2":{
+  "model_name":"transformer_2_layer_11-20",
+  "exist_model": "transformer_2_layer_final",
+  "seq_length": 50,
+  "batch_size": 8,
+  "embedding_dim": 256,
+  "nhead": 4,
+  "dim_feedforward": 512,
+  "num_layers": 2,
+  "dropout_rate": 0.1,
+  "learning_rate": 0.0001,
+  "grad_clip": 1.0,
+  "epochs": 10
 }
 }

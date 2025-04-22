@@ -14,7 +14,7 @@ def main():
        training_config = json.load(f)
     
 
-    config = training_config["1"]
+    config = training_config["2"]
     tokenizer = TextPreprocessor()
     tokenizer.load("data/preprocessor.pt")
 
@@ -36,9 +36,9 @@ def main():
     
     # Initialize trainer
     trainer = Trainer(model, config)
-    if os.path.exists(f"models/{config['model_name']}_best.pt"):
-        print(f"Loading existing model from {config['model_name']}_best.pt")
-        checkpoint = torch.load(f"models/{config['model_name']}_best.pt")
+    if os.path.exists(f"models/{config['model_name']}.pt"):
+        print(f"Loading existing model from {config['model_name']}.pt")
+        checkpoint = torch.load(f"models/{config['model_name']}.pt")
         model.load_state_dict(checkpoint['model_state_dict'])
     # Train model
     trainer.train(train_loader, val_loader, config["epochs"])

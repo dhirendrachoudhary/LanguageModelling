@@ -1,0 +1,16 @@
+Seed: Once upon a time there was a king who had a wife,
+
+Generated Text:
+Once upon a time there was a king who had a wife, for food on whose presence an impression that her a beast revolted of <|unk|> of bread and married her, and particularly and no sign in red and knew it, and no longer. Then again must show her and now turned to stop until she should cure the damsel upon the <|unk|> son of it, set out the lady Dunya went on the traveller came, and Molly, that it to him, to Elsa. This was come to your uncle begged maid, nor sleep, and with her. And when God (whose name was growing companion, Raja <|unk|> her palace, not settle their
+
+Metrics:
+- Seed Length: 12
+- Gen Length: 112
+- Distinct 1: 0.7411
+- Distinct 2: 0.9910
+- Distinct 3: 1.0000
+- Repetition 2: 0.0090
+- Perplexity: 86.1622
+- Bleu: 0.1172
+- Length Ratio: 2.2857
+- Oov Rate: 0.0000
