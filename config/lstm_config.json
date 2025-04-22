@@ -23,5 +23,18 @@
   "learning_rate": 0.001,
   "grad_clip": 1.0,
   "epochs": 2
+},
+"3":{
+  "model_name":"lstm_2_layer_v2",
+  "exist_model": "lstm_2_layer_v1_best",
+  "seq_length": 60,
+  "batch_size": 64,
+  "embedding_dim": 256,
+  "hidden_dim": 512,
+  "num_layers": 2,
+  "dropout_rate": 0.2,
+  "learning_rate": 0.001,
+  "grad_clip": 1.0,
+  "epochs": 10
 }
 }

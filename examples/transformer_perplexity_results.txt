@@ -1,0 +1,2 @@
+transformer_2_layer_11-20_best.pt: 0.9912734169216108
+transformer_2_layer_final.pt: 0.9917562908990567

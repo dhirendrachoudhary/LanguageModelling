@@ -1,0 +1,7 @@
+transformer_2_layer_epoch_8.pt: 0.9919287777623715
+transformer_2_layer_best.pt: 0.9921116076209208
+transformer_2_layer_epoch_4.pt: 0.9920183676034701
+transformer_2_layer_epoch_6.pt: 0.9918976071275488
+transformer_2_layer_final.pt: 0.9917562908990567
+transformer_2_layer_epoch_10.pt: 0.9917562908990567
+transformer_2_layer_epoch_2.pt: 0.9921882299166647
