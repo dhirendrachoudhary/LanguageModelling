@@ -6,34 +6,34 @@ from torch.utils.data import Dataset, DataLoader
 
 from tokenizers import Tokenizer, models, pre_tokenizers, trainers
 
-# ---------------- Hyperparameters ----------------
-batch_size    = 16      # sequences per batch
-block_size    = 64      # context length
+
+batch_size    = 16
+block_size    = 64
 learning_rate = 3e-4
-epochs        = 5        # number of full passes over data
+epochs        = 5
 device        = 'cuda' if torch.cuda.is_available() else 'cpu'
-eval_interval = 1        # eval after each epoch
+eval_interval = 1
 eval_iters    = 200
 n_embd        = 256
 n_head        = 3
 n_layer       = 4
 dropout       = 0.2
 bpe_vocab     = 30000
-# -------------------------------------------------
+
 print(device)
 
 
-# Now use the file like this:
+
 with open('/home/susmita-roy/Downloads/NLP/NLP Project/fairytale.txt', 'r', encoding='utf-8') as f:
     text = f.read()
 
 
-# 2. Train a BPE tokenizer on your text
+
 if not os.path.isfile('tokenizer.json'):
-    # Save dataset to file (needed by tokenizers)
+
     with open('data.txt', 'w', encoding='utf-8') as f:
         f.write(text)
-    # Build and train
+
     tokenizer = Tokenizer(models.BPE())
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
     trainer = trainers.BpeTrainer(vocab_size=bpe_vocab,
@@ -43,7 +43,7 @@ if not os.path.isfile('tokenizer.json'):
 else:
     tokenizer = Tokenizer.from_file("tokenizer.json")
 
-# 3. Define encode/decode and vocab mappings
+
 encode = lambda s: tokenizer.encode(s).ids
 decode = lambda ids: tokenizer.decode(ids)
 
@@ -51,13 +51,12 @@ vocab_size = tokenizer.get_vocab_size()
 stoi       = tokenizer.get_vocab()                # token -> id
 itos       = {i: tok for tok, i in stoi.items()}  # id    -> token
 
-# 4. Encode full dataset and split
+
 data      = torch.tensor(encode(text), dtype=torch.long)
 n_train   = int(0.9 * len(data))
 train_data= data[:n_train]
 val_data  = data[n_train:]
 
-# 5. Dataset for block sequences
 class CharDataset(Dataset):
     def __init__(self, data, block_size):
         self.data = data
@@ -75,7 +74,7 @@ val_ds   = CharDataset(val_data,   block_size)
 train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
 val_loader   = DataLoader(val_ds,   batch_size=batch_size)
 
-# 6. Loss estimation
+
 @torch.no_grad()
 def estimate_loss():
     model.eval()
@@ -91,7 +90,7 @@ def estimate_loss():
     model.train()
     return out
 
-# 7. Transformer model definitions
+
 class Head(nn.Module):
     def __init__(self, head_size):
         super().__init__()
@@ -102,15 +101,14 @@ class Head(nn.Module):
         self.dropout = nn.Dropout(dropout)
     def forward(self, x):
         B,T,C = x.size()
-        k = self.key(x)   # (B,T,hs)
-        q = self.query(x) # (B,T,hs)
-        # scaled dot-product attention
-        wei = q @ k.transpose(-2,-1) * (k.shape[-1] ** -0.5)  # (B, T, T)
+        k = self.key(x)
+        q = self.query(x)
+        wei = q @ k.transpose(-2,-1) * (k.shape[-1] ** -0.5)
         wei = wei.masked_fill(self.tril[:T, :T] == 0, float('-inf'))
         wei = F.softmax(wei, dim=-1)
         wei = self.dropout(wei)
-        v = self.value(x)  # (B,T,hs)
-        return wei @ v     # (B,T,hs)
+        v = self.value(x)
+        return wei @ v
 
 class MultiHeadAttention(nn.Module):
     def __init__(self, num_heads, head_size):
@@ -167,13 +165,12 @@ class GPTLanguageModel(nn.Module):
 
     def forward(self, idx, targets=None):
         B, T = idx.size()
-        token_emb = self.token_embedding_table(idx)                           # (B,T,n_embd)
-        pos_emb   = self.position_embedding_table(torch.arange(T, device=device))  # (T,n_embd)
+        token_emb = self.token_embedding_table(idx)
+        pos_emb   = self.position_embedding_table(torch.arange(T, device=device))
         x = token_emb + pos_emb
-        x = self.blocks(x)       # (B,T,n_embd)
-        x = self.ln_f(x)         # (B,T,n_embd)
-        logits = self.lm_head(x) # (B,T,vocab_size)
-
+        x = self.blocks(x)
+        x = self.ln_f(x)
+        logits = self.lm_head(x)
         if targets is None:
             return logits, None
         loss = F.cross_entropy(logits.view(-1, logits.size(-1)), targets.view(-1))
@@ -189,12 +186,12 @@ class GPTLanguageModel(nn.Module):
             idx = torch.cat([idx, idx_next], dim=1)
         return idx
 
-# 8. Instantiate model, optimizer
+
 model     = GPTLanguageModel().to(device)
 optimizer = torch.optim.AdamW(model.parameters(), lr=learning_rate)
 print(f"Model parameters: {sum(p.numel() for p in model.parameters())/1e6:.2f}M")
 
-# 9. Training loop (epoch-based)
+
 for epoch in range(1, epochs+1):
     print(f"\n=== Epoch {epoch}/{epochs} ===")
     # training
@@ -209,7 +206,7 @@ for epoch in range(1, epochs+1):
     losses = estimate_loss()
     print(f"Train loss: {losses['train']:.4f}, Val loss: {losses['val']:.4f}")
 
-# 10. Sample generation
+
 model.eval()
 start = torch.zeros((1,1), dtype=torch.long, device=device)
 out   = model.generate(start, max_new_tokens=200)[0].tolist()
