@@ -1,0 +1,25 @@
+/home/susmita-roy/anaconda3/envs/deeplearning/bin/python /home/susmita-roy/PycharmProjects/test123/gpt2_2.py 
+cuda
+Model parameters: 18.56M
+
+=== Epoch 1/5 ===
+Train loss: 2.2848, Val loss: 9.0510
+
+=== Epoch 2/5 ===
+Train loss: 2.0131, Val loss: 9.8284
+
+=== Epoch 3/5 ===
+Train loss: 1.8620, Val loss: 10.1262
+
+=== Epoch 4/5 ===
+Train loss: 1.7728, Val loss: 10.5603
+
+=== Epoch 5/5 ===
+Train loss: 1.7100, Val loss: 10.7873
+
+--- Generated Text ---
+
+, and , missing from it by our hands , he will have to take it off .' Then the girl and her husband took the kettle . By - and - by the hand became the same as before , and the sleeper as they drew near stood the little maiden . ' In the midst of the lake ,' said she , and saw an old duck swimming on to it . ' I will take off her tip of my ear with one hand , bending down to the edge of the pond and read her beautiful ways .' With these words the sheep had seized them all , but the girl remembered the fairies had advised her to pluck any of her treasures , and to mount her horse and ride away , and as soon as he saw her off she walked the most lovely young man . Now the great herds of elephants treading on each other ' s forehead , and the points of their tails , those which the youngest could see it all round in order to see how a branch in the tree and how it came about . "
+
+Process finished with exit code 0
+
