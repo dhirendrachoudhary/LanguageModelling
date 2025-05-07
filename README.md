@@ -84,7 +84,6 @@ The project employs character-level tokenization. This means the models learn to
 ### LSTM Model
 * **Architecture:** Processes sequences step-by-step, using gates (Forget, Input, Output) to control information flow through a cell state. Can be stacked in multiple layers.
 * **Output:** Final hidden states are passed through a linear layer to predict the next character.
-    * *Interactive Suggestion:* Link to your LSTM model code (e.g., `models/lstm_model.py`).
 
 ### Transformer Model
 * **Architecture:** Relies on self-attention mechanisms, processing the entire sequence simultaneously. Key components include:
@@ -95,7 +94,6 @@ The project employs character-level tokenization. This means the models learn to
     * Residual Connections & Layer Normalization
     * Can be stacked in multiple encoder blocks.
 * **Output:** Final representations are passed through a linear layer for character prediction.
-    * *Interactive Suggestion:* Link to your Transformer model code (e.g., `models/transformer_model.py`).
 
 ### Training Process
 1.  **Initialization:** Load model, tokenizer, datasets, optimizer (Adam), loss function (CrossEntropyLoss).
@@ -117,7 +115,6 @@ The project employs character-level tokenization. This means the models learn to
 * Dropout Rate (e.g., LSTM: 0.2, Transformer: 0.1)
 * Sequence Length (e.g., 50, 60)
 * Batch Size (e.g., 6, 64)
-    * *Interactive Suggestion:* Link to configuration files (e.g., `config/lstm_config.json`, `config/transformer_config.json`).
 
 ---
 
@@ -146,7 +143,6 @@ This section guides you through setting up the environment and running the model
     typing-extensions==4.13.1
     zipp==3.21.0
     ```
-    * *Interactive Suggestion:* `pip install -r requirements.txt` (if you create this file).
 
 ### Setup
 1.  **Clone the repository:**
@@ -164,16 +160,12 @@ This section guides you through setting up the environment and running the model
     pip install -r requirements.txt # Or pip install torch torchvision torchaudio numpy matplotlib tqdm ...
     ```
 4.  **Download/Prepare Dataset:**
-    * Provide instructions on how users can get the fairy tale corpus.
-    * If there's a preprocessing script, mention it here:
         ```bash
         # Example:
         # python preprocess_data.py --input_file path/to/raw_fairy_tales.txt --output_dir data/
         ```
 
 ### Training Models
-* Provide commands to train the LSTM and Transformer models.
-* Explain how to specify configurations (e.g., using your `config.json` files).
     ```bash
     # Example for training LSTM:
     # python train.py --model_type lstm --config_path config/lstm_config.json --data_path data/processed_text.txt --vocab_path data/vocab.json
@@ -181,21 +173,17 @@ This section guides you through setting up the environment and running the model
     # Example for training Transformer:
     # python train.py --model_type transformer --config_path config/transformer_config.json --data_path data/processed_text.txt --vocab_path data/vocab.json
     ```
-    * *Interactive Suggestion:* Link to your training script (e.g., `train.py`).
 
 ### Generating Text
-* Provide commands or script details for generating text using a trained model.
-* Explain how to specify the model checkpoint, seed text, length, and sampling strategy.
     ```bash
     # Example for text generation:
     # python generate.py --model_path checkpoints/best_lstm_model.pt --vocab_path data/vocab.json --seed_text "Once upon a time" --max_length 200 --sampling_strategy top-k --k 10
     ```
-* **Sampling Strategies Available (as per your report):**
+* **Sampling Strategies Available:**
     * Greedy Search
     * Top-k Sampling (specify `k`)
     * Nucleus (Top-p) Sampling (specify `p`)
     * Temperature Scaling (specify `temperature`)
-    * *Interactive Suggestion:* Link to your generation script (e.g., `generate.py`). Encourage users to try different seeds and parameters!
 
 ---
 
@@ -207,11 +195,9 @@ Training and validation loss curves were monitored to track learning dynamics.
 * The Transformer model converged faster initially but showed a slight gap later, hinting at mild overfitting.
 
 *Interactive Suggestion:*
-* Embed the actual loss curve image (Figure 1 from your report) directly in the README.
     ```markdown
     ![Loss Curves](path/to/your/loss_curve_image.png)
     ```
-* If you have interactive plotting capabilities (e.g., hosted notebooks, embedded tools), link to them.
 
 ### Qualitative Analysis
 * **LSTM:** Produced readable character sequences, some fairy tale elements. Struggled with global coherence and showed repetition.
