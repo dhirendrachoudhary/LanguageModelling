@@ -1,4 +1,4 @@
-# Language Modelling for Fairy Tale Generation---
+# Language Modelling for Fairy Tale Generation
 
 ## Table of Contents
 
@@ -216,8 +216,7 @@ Training and validation loss curves were monitored to track learning dynamics.
 ### Qualitative Analysis
 * **LSTM:** Produced readable character sequences, some fairy tale elements. Struggled with global coherence and showed repetition.
 * **Transformer:** Consistently produced more fluent and longer coherent passages. Exhibited higher lexical diversity and better captured fairy tale style, including imaginative elements.
-
-*(See Section 5.4 of the report for detailed observations.)*
+  
 
 ### Quantitative Metrics
 | Feature          | LSTM Model         | Transformer Model  | Notes                                |
@@ -229,14 +228,3 @@ Training and validation loss curves were monitored to track learning dynamics.
 | Distinct-2 (Gen.)| 0.25               | 0.35               | Transformer: more diverse phrases    |
 | BLEU Score (Gen.)| 10.5               | 12.0               | Ref: curated fairy tales corpus      |
 
-*(Note: The report also mentions Distinct-3, Repetition-2, Length Ratio, OOV Rate. You can add more rows or a separate table if desired.)*
-
-*Interactive Suggestion:*
-* If you have scripts to recalculate these metrics, mention them.
-* Link to files containing detailed evaluation results if available.
-
-### Generated Fairy Tale Samples
-
-*Interactive Suggestion:* Include a few of the best and most illustrative generated samples from both models here. This is highly engaging for readers.
-
-**Example LSTM Generation:**
